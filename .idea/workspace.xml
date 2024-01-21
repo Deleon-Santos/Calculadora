@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4dcb792e-3a21-40b2-a989-1dc460926d9f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/calculadora.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="4dcb792e-3a21-40b2-a989-1dc460926d9f" name="Changes" comment="Calculadora  funcional&#10;&#10;Signed-off-by: Deleon &lt;delps.santos1987@gmail.com&gt;" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="Git.Settings">
+    <option name="SIGN_OFF_COMMIT" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2bBmt5U32ozrZnLsr0Cn7yJlLsG" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -26,8 +21,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.calculadora.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -46,6 +43,36 @@
       <option name="presentableId" value="Default" />
       <updated>1705697058216</updated>
     </task>
+    <task id="LOCAL-00001" summary="Calculadora  funcional">
+      <option name="closed" value="true" />
+      <created>1705841559758</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1705841559758</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Calculadora  funcional">
+      <option name="closed" value="true" />
+      <created>1705841696749</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1705841696749</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Calculadora  funcional&#10;&#10;Signed-off-by: Deleon &lt;delps.santos1987@gmail.com&gt;">
+      <option name="closed" value="true" />
+      <created>1705841708115</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1705841708115</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Calculadora  funcional" />
+    <MESSAGE value="Calculadora  funcional&#10;&#10;Signed-off-by: Deleon &lt;delps.santos1987@gmail.com&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Calculadora  funcional&#10;&#10;Signed-off-by: Deleon &lt;delps.santos1987@gmail.com&gt;" />
   </component>
 </project>
