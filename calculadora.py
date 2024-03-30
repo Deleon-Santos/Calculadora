@@ -1,28 +1,28 @@
 """Estou desenvolvendo uma calculadora simplificada que possa executar corretamente as funcionalidades basicas do dia-a-dia"""
 
- 
+
 import PySimpleGUI as sg
 
 #Neste bloco escolhemos o tema, visor, botões e layout da calculadora
 sg.theme("NeutralBlue")
 
-visor  =[[sg.Input("0", size=(18, 1), font=("Any", 31, "bold"),background_color="lightYellow", key="-manter-", justification='right')],
-         [sg.Input("0", size=(10, 1), font=("Any", 55, "bold"), key="-out-", justification='right')],]
+visor  =[[sg.Input("0", size=(22, 1), font=("Any", 18, "bold"),background_color="lightYellow", key="-manter-", justification='right'),sg.P(), sg.Button("Sair",size=(6,1),button_color="red",font=("Any",14))],
+         [sg.Input("0", size=(10, 1), font=("Any", 50, "bold"), key="-out-", justification='right')],]
 
 l_numeros=[[sg.Button("7", size=(7,3), key="7", font="bold",), sg.Button("8", size=(7, 3), key="8", font="bold"), sg.Button("9", size=(7, 3), key="9", font="bold")],
         [sg.Button("4", size=(7, 3), key="4", font="bold"), sg.Button("5", size=(7, 3), key="5", font="bold"), sg.Button("6", size=(7, 3), key="6", font="bold")],
         [sg.Button("1", size=(7, 3), key="1", font="bold"), sg.Button("2", size=(7, 3), key="2", font="bold"), sg.Button("3", size=(7, 3), key="3", font="bold")],
         [sg.Button("+/-", size=(7, 3), key="+/-", font="bold",button_color="lightBlue",), sg.Button("0", size=(7, 3), key="0", font="bold"), sg.Button(",", size=(7, 3), key=".", font="bold",button_color="lightBlue",)],]
     
-operadores_1 =[[sg.Button("<", size=(7, 3), font="bold",button_color="#ECA138", key="<")],
-        [sg.Button("x", size=(7, 3), font="bold",button_color="lightBlue", key="*")],
-        [sg.Button("-", size=(7, 3), font="bold",button_color="lightBlue", key="-")],
-        [sg.Button("+", size=(7, 3), font="bold",button_color="lightBlue", key="+")],]
+operadores_1 =[[sg.Button("<", size=(5, 3), font="bold",button_color="#ECA138", key="<")],
+        [sg.Button("x", size=(5, 3), font="bold",button_color="lightBlue", key="*")],
+        [sg.Button("-", size=(5, 3), font="bold",button_color="lightBlue", key="-")],
+        [sg.Button("+", size=(5, 3), font="bold",button_color="lightBlue", key="+")],]
 
-operadores_2 =[[sg.Button("C", size=(7, 3), font="bold",button_color="#ECA138", key="c")],
-        [sg.Button("/", size=(7, 3), font="bold",button_color="lightBlue", key="/")],
-        [sg.Button("%", size=(7, 3), font="bold",button_color="lightBlue", key="%")],
-        [sg.Button("=", size=(7, 3), font="bold",button_color="#ECA138", key="=")],]
+operadores_2 =[[sg.Button("C", size=(5, 3), font="bold",button_color="red", key="c")],
+        [sg.Button("/", size=(5, 3), font="bold",button_color="lightBlue", key="/")],
+        [sg.Button("%", size=(5, 3), font="bold",button_color="lightBlue", key="%")],
+        [sg.Button("=", size=(5, 3), font="bold",button_color="#ECA138", key="=")],]
     
 layout_calculadora =[[sg.Frame("", visor)],
                      [sg.Frame("", l_numeros), sg.Col(operadores_1), sg.Col(operadores_2)],]
@@ -32,12 +32,12 @@ tab_layout1 = [[sg.Frame("",layout_calculadora)], ]
 menu_botao = [["Sobre"]]
 janela = [
     [sg.MenuBar(menu_botao)],
-    [sg.Text("NOVA CALCULADORA", size=(30, 1), justification='center', font=("Any", 18, "bold"), relief='flat')],
+    [sg.P(),sg.Text("NOVA CALCULADORA", justification='center', font=("Any", 18, "bold"), relief='flat'),sg.P()],
     [sg.TabGroup([[sg.Tab("Calculadora", tab_layout1)],])],
-    [sg.Text("", size=(15, 1)), sg.Button("Sair",size=(18,1),button_color="red")],]
+    ]
 
 #Inicio do programa, declaração das variaveis     
-window = sg.Window("TABOADA", janela,size=(498,600), resizable=True)
+window = sg.Window("TABOADA", janela, resizable=True)
 l_operadores = ["+", "-", "*","/"]
 historico=""
 display = ""
@@ -57,23 +57,27 @@ while True: #laço principal
                 window["-out-"].update(historico)
         else:
             display+=event
-            historico+=event
+            historico+=display
+            
             window["-out-"].update(historico)
         
     elif event in l_operadores:
-        operador=event
+        
         numero_1=display
-        display+=event
+        
         if event in display[:-1]: #se o operador esta na ultima posição do display
-            display = display[:-1] + operador  #atualiza o operador
+            display = display[:-1] + event  #atualiza o operador
             historico=display
+            operador=event
             window["-out-"].update(historico)
             window["-manter-"].update(historico)
             display=""
         else:
             display += event
             historico+=event
+            operador=event
             window["-out-"].update(historico)
+            window["-manter-"].update(historico)
             display=""
 
     elif event == "=":
@@ -96,10 +100,13 @@ while True: #laço principal
             display = (f"{resp}".replace(".0",""))# remove o .0 do display
             window["-out-"].update(display)
             operador = ""
-            numero_1=display #o numero_ deve receber o resto da operação
-            historico=display
-            numero_2=''
-    
+            if display=="0":
+                display=""
+            else:
+                numero_1=display #o numero_ deve receber o resto da operação
+                historico=display
+                numero_2=''
+        
     elif event=="<":
         if len(display):
             display=display[:-1] #Apaga a ultima posição do display 
@@ -147,6 +154,4 @@ while True: #laço principal
             historico=display
             operador = ""
             numero_2=''
-    elif event == "Sobre":
-        sg.popup_get_text("versão:1.006")
 window.close()    
