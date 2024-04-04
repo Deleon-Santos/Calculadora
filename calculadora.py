@@ -4,10 +4,20 @@
 import PySimpleGUI as sg
 
 #Neste bloco escolhemos o tema, visor, botões e layout da calculadora
-sg.theme("NeutralBlue")
+#sg.theme("NeutralBlue")
+sg.LOOK_AND_FEEL_TABLE['novoTheme'] = {'BACKGROUND': '#A9A9A9', 
+                                        'TEXT': '#000000', 
+                                        'INPUT': '#DCDCDC', 
+                                        'TEXT_INPUT': '#000000', 
+                                        'SCROLL': '#99CC99', 
+                                        'BUTTON': ('#000000', '#C0C0C0'), 
+                                        'PROGRESS': ('#D1826B', '#CC8019'), 
+                                        'BORDER': 5, 'SLIDER_DEPTH': 5,  
+                                        'PROGRESS_DEPTH': 6, } 
+sg.theme('novoTheme') 
 
-visor  =[[sg.Input("0", size=(22, 1), font=("Any", 18, "bold"),background_color="lightYellow", key="-manter-", justification='right'),sg.P(), sg.Button("Sair",size=(6,1),button_color="red",font=("Any",14))],
-         [sg.Input("0", size=(10, 1), font=("Any", 50, "bold"), key="-out-", justification='right')],]
+visor  =[[sg.Input("0", size=(28, 1), font=("Any", 18, "bold"),background_color="lightYellow", key="-manter-", justification='right'),sg.P(), sg.Button("Sair",size=(6,1),button_color="red",font=("Any",14))],
+         [sg.Input("0", size=(13, 1), font=("Any", 49, "bold"), key="-out-", justification='right')],]
 
 l_numeros=[[sg.Button("7", size=(7,3), key="7", font="bold",), sg.Button("8", size=(7, 3), key="8", font="bold"), sg.Button("9", size=(7, 3), key="9", font="bold")],
         [sg.Button("4", size=(7, 3), key="4", font="bold"), sg.Button("5", size=(7, 3), key="5", font="bold"), sg.Button("6", size=(7, 3), key="6", font="bold")],
@@ -29,15 +39,15 @@ layout_calculadora =[[sg.Frame("", visor)],
                      
 tab_layout1 = [[sg.Frame("",layout_calculadora)], ]
 
-menu_botao = [["Sobre"]]
+menu_botao = [["Sobre",['Sobre']]]
 janela = [
     [sg.MenuBar(menu_botao)],
-    [sg.P(),sg.Text("NOVA CALCULADORA", justification='center', font=("Any", 18, "bold"), relief='flat'),sg.P()],
+    [sg.P(),sg.Text("NOVA CALCULADORA", justification='center', font=("Any", 20, "bold"), relief='flat'),sg.P()],
     [sg.TabGroup([[sg.Tab("Calculadora", tab_layout1)],])],
     ]
 
 #Inicio do programa, declaração das variaveis     
-window = sg.Window("TABOADA", janela, resizable=True)
+window = sg.Window("CALCULADORA SIMPLIFICADA", janela, resizable=True)
 l_operadores = ["+", "-", "*","/"]
 historico=""
 display = ""
@@ -48,43 +58,36 @@ while True: #laço principal
     event, values = window.read()
     if event in (sg.WINDOW_CLOSED, "Sair"):
         break
-       
-    elif event in l_numeros:
+    #se o evento esta em l_numeros e nao foi registrado um operador faça...  
+    if event in l_numeros:
         if not operador:
-            if len(display) < 15: #maximo de 15 caracteres na operação inicial
-                display += event
-                historico+=event
-                window["-out-"].update(historico)
+            display += event
+            window["-out-"].update(display)
         else:
             display+=event
-            historico+=display
-            
-            window["-out-"].update(historico)
-        
+            historico+=event
+            window["-out-"].update(display)
+
     elif event in l_operadores:
-        
         numero_1=display
         
         if event in display[:-1]: #se o operador esta na ultima posição do display
             display = display[:-1] + event  #atualiza o operador
-            historico=display
             operador=event
-            window["-out-"].update(historico)
-            window["-manter-"].update(historico)
-            display=""
+            window["-out-"].update(display)
+            
         else:
-            display += event
-            historico+=event
+            display+= event
+            #historico+=display
             operador=event
-            window["-out-"].update(historico)
-            window["-manter-"].update(historico)
-            display=""
+            window["-out-"].update(display)
 
     elif event == "=":
         if operador:
-            numero_2=display
-            window["-manter-"].update(historico)
-            historico=""
+            display+=event
+            numero_2=historico
+            window["-manter-"].update(display)
+            
             if operador == "+":
                 resp =str(float (numero_1)+ float(numero_2))
             elif operador == "-":
@@ -96,21 +99,21 @@ while True: #laço principal
                     resp =str(float (numero_1)/ float(numero_2))
                 else:
                     resp = "Erro"
-            
+            print(resp,numero_1, numero_2)
             display = (f"{resp}".replace(".0",""))# remove o .0 do display
             window["-out-"].update(display)
             operador = ""
-            if display=="0":
-                display=""
-            else:
-                numero_1=display #o numero_ deve receber o resto da operação
-                historico=display
-                numero_2=''
+            historico=""
+            numero_1=display #o numero_ deve receber o resto da operação
+            
+            numero_2=''
         
     elif event=="<":
         if len(display):
             display=display[:-1] #Apaga a ultima posição do display 
+            historico=historico[:-1]
             window["-out-"].update(display)
+            
     
     elif event == "c":
         display = ""
@@ -129,8 +132,9 @@ while True: #laço principal
     elif event==".":
         if "." not in display:#Ler o display para adicionar um "."
             display += "."
-            historico+=display
+            #historico+=display
             window["-out-"].update(display)
+            
     
     elif event == "%":
         if operador:
@@ -154,4 +158,7 @@ while True: #laço principal
             historico=display
             operador = ""
             numero_2=''
+    elif event == "Sobre":
+        
+        sg.popup('Calculadora simplificada v3.2\n Desenvolvida para culculos entre\n dois numeros inteiros, flutuantes,\n negativos e porcentagens')       
 window.close()    
