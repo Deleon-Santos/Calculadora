@@ -78,7 +78,6 @@ while True: #laço principal
             
         else:
             display+= event
-            #historico+=display
             operador=event
             window["-out-"].update(display)
 
@@ -99,13 +98,11 @@ while True: #laço principal
                     resp =str(float (numero_1)/ float(numero_2))
                 else:
                     resp = "Erro"
-            print(resp,numero_1, numero_2)
             display = (f"{resp}".replace(".0",""))# remove o .0 do display
             window["-out-"].update(display)
             operador = ""
             historico=""
             numero_1=display #o numero_ deve receber o resto da operação
-            
             numero_2=''
         
     elif event=="<":
@@ -114,7 +111,6 @@ while True: #laço principal
             historico=historico[:-1]
             window["-out-"].update(display)
             
-    
     elif event == "c":
         display = ""
         operador = ""
@@ -132,15 +128,13 @@ while True: #laço principal
     elif event==".":
         if "." not in display:#Ler o display para adicionar um "."
             display += "."
-            #historico+=display
             window["-out-"].update(display)
-            
     
     elif event == "%":
         if operador:
-            porcentagem = float(numero_1) * (float(display) / 100)  # Convertendo o segundo numero no display para porcentagem
-            numero_2 = porcentagem
-            window["-manter-"].update(historico)
+            display+=event
+            numero_2 = float(numero_1) * (float(historico) / 100)  # Convertendo o segundo numero no display para porcentagem
+            window["-manter-"].update(display)
             if operador == "+":
                 resp = str(float(numero_1) + numero_2)
             elif operador == "-":
@@ -155,10 +149,10 @@ while True: #laço principal
             display = (f"{resp}".replace(".0",""))
             window["-out-"].update(display)
             numero_1=display 
-            historico=display
+            historico=''
             operador = ""
             numero_2=''
+    
     elif event == "Sobre":
-        
         sg.popup('Calculadora simplificada v3.2\n Desenvolvida para culculos entre\n dois numeros inteiros, flutuantes,\n negativos e porcentagens')       
 window.close()    
