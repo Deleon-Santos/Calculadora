@@ -4,47 +4,47 @@
 import PySimpleGUI as sg
 
 #Neste bloco escolhemos o tema, visor, botões e layout da calculadora
-#sg.theme("NeutralBlue")
+
 sg.LOOK_AND_FEEL_TABLE['novoTheme'] = {'BACKGROUND': '#A9A9A9', 
-                                        'TEXT': '#000000', 
-                                        'INPUT': '#DCDCDC', 
-                                        'TEXT_INPUT': '#000000', 
-                                        'SCROLL': '#99CC99', 
-                                        'BUTTON': ('#000000', '#C0C0C0'), 
-                                        'PROGRESS': ('#D1826B', '#CC8019'), 
-                                        'BORDER': 5, 'SLIDER_DEPTH': 5,  
-                                        'PROGRESS_DEPTH': 6, } 
+                                    'TEXT': '#000000', 
+                                    'INPUT': '#DCDCDC', 
+                                    'TEXT_INPUT': '#000000', 
+                                    'SCROLL': '#99CC99', 
+                                    'BUTTON': ('#000000', '#C0C0C0'), 
+                                    'PROGRESS': ('#D1826B', '#CC8019'), 
+                                    'BORDER': 5, 'SLIDER_DEPTH': 5,  
+                                    'PROGRESS_DEPTH': 6, } 
 sg.theme('novoTheme') 
 
 visor  =[[sg.Input("0", size=(28, 1), font=("Any", 18, "bold"),background_color="lightYellow", key="-manter-", justification='right'),sg.P(), sg.Button("Sair",size=(6,1),button_color="red",font=("Any",14))],
-         [sg.Input("0", size=(13, 1), font=("Any", 49, "bold"), key="-out-", justification='right')],]
+        [sg.Input("0", size=(13, 1), font=("Any", 49, "bold"), key="-out-", justification='right')],]
 
 l_numeros=[[sg.Button("7", size=(7,3), key="7", font="bold",), sg.Button("8", size=(7, 3), key="8", font="bold"), sg.Button("9", size=(7, 3), key="9", font="bold")],
-        [sg.Button("4", size=(7, 3), key="4", font="bold"), sg.Button("5", size=(7, 3), key="5", font="bold"), sg.Button("6", size=(7, 3), key="6", font="bold")],
-        [sg.Button("1", size=(7, 3), key="1", font="bold"), sg.Button("2", size=(7, 3), key="2", font="bold"), sg.Button("3", size=(7, 3), key="3", font="bold")],
-        [sg.Button("+/-", size=(7, 3), key="+/-", font="bold",button_color="lightBlue",), sg.Button("0", size=(7, 3), key="0", font="bold"), sg.Button(",", size=(7, 3), key=".", font="bold",button_color="lightBlue",)],]
-    
+    [sg.Button("4", size=(7, 3), key="4", font="bold"), sg.Button("5", size=(7, 3), key="5", font="bold"), sg.Button("6", size=(7, 3), key="6", font="bold")],
+    [sg.Button("1", size=(7, 3), key="1", font="bold"), sg.Button("2", size=(7, 3), key="2", font="bold"), sg.Button("3", size=(7, 3), key="3", font="bold")],
+    [sg.Button("+/-", size=(7, 3), key="+/-", font="bold",button_color="lightBlue",), sg.Button("0", size=(7, 3), key="0", font="bold"), sg.Button(",", size=(7, 3), key=".", font="bold",button_color="lightBlue",)],]
+
 operadores_1 =[[sg.Button("<", size=(5, 3), font="bold",button_color="#ECA138", key="<")],
-        [sg.Button("x", size=(5, 3), font="bold",button_color="lightBlue", key="*")],
-        [sg.Button("-", size=(5, 3), font="bold",button_color="lightBlue", key="-")],
-        [sg.Button("+", size=(5, 3), font="bold",button_color="lightBlue", key="+")],]
+    [sg.Button("x", size=(5, 3), font="bold",button_color="lightBlue", key="*")],
+    [sg.Button("-", size=(5, 3), font="bold",button_color="lightBlue", key="-")],
+    [sg.Button("+", size=(5, 3), font="bold",button_color="lightBlue", key="+")],]
 
 operadores_2 =[[sg.Button("C", size=(5, 3), font="bold",button_color="red", key="c")],
-        [sg.Button("/", size=(5, 3), font="bold",button_color="lightBlue", key="/")],
-        [sg.Button("%", size=(5, 3), font="bold",button_color="lightBlue", key="%")],
-        [sg.Button("=", size=(5, 3), font="bold",button_color="#ECA138", key="=")],]
-    
+    [sg.Button("/", size=(5, 3), font="bold",button_color="lightBlue", key="/")],
+    [sg.Button("%", size=(5, 3), font="bold",button_color="lightBlue", key="%")],
+    [sg.Button("=", size=(5, 3), font="bold",button_color="#ECA138", key="=")],]
+
 layout_calculadora =[[sg.Frame("", visor)],
-                     [sg.Frame("", l_numeros), sg.Col(operadores_1), sg.Col(operadores_2)],]
-                     
+                    [sg.Frame("", l_numeros), sg.Col(operadores_1), sg.Col(operadores_2)],]
+                    
 tab_layout1 = [[sg.Frame("",layout_calculadora)], ]
 
 menu_botao = [["Sobre",['Sobre']]]
 janela = [
-    [sg.MenuBar(menu_botao)],
-    [sg.P(),sg.Text("NOVA CALCULADORA", justification='center', font=("Any", 20, "bold"), relief='flat'),sg.P()],
-    [sg.TabGroup([[sg.Tab("Calculadora", tab_layout1)],])],
-    ]
+[sg.MenuBar(menu_botao)],
+[sg.P(),sg.Text("NOVA CALCULADORA", justification='center', font=("Any", 20, "bold"), relief='flat'),sg.P()],
+[sg.TabGroup([[sg.Tab("Calculadora", tab_layout1)],])],
+]
 
 #Inicio do programa, declaração das variaveis     
 window = sg.Window("CALCULADORA SIMPLIFICADA", janela, resizable=True)
@@ -116,7 +116,7 @@ while True: #laço principal
         operador = ""
         historico=""
         window["-out-"].update("0") #Limpa os valores no display
-    
+
     elif event == "+/-":
         if display and display[0] != '-':# ler o valor de dispay na posição[0] para converter em negativo
             display = '-' + display
@@ -129,7 +129,7 @@ while True: #laço principal
         if "." not in display:#Ler o display para adicionar um "."
             display += "."
             window["-out-"].update(display)
-    
+
     elif event == "%":
         if operador:
             display+=event
@@ -152,7 +152,7 @@ while True: #laço principal
             historico=''
             operador = ""
             numero_2=''
-    
+
     elif event == "Sobre":
         sg.popup('Calculadora simplificada v3.2\n Desenvolvida para culculos entre\n dois numeros inteiros, flutuantes,\n negativos e porcentagens')       
 window.close()    
