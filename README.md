@@ -43,7 +43,7 @@
  - Explore outras funcionalidades, como limpar o visor (C), apagar o último caractere (<), alterar o sinal (+/-) e calcular porcentagens (%).
 
  **Versão**
- - Versão 3.2 da calculadora simplificada.
+ - Versão 3.2.1 da calculadora simplificada.
 
  **Desenvolvedor**
  - Desenvolvido por Deleon Santos.
