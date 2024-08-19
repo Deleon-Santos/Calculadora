@@ -154,5 +154,5 @@ while True: #laço principal
             numero_2=''
 
     elif event == "Sobre":
-        sg.popup('Calculadora simplificada v3.2\n Desenvolvida para culculos entre\n dois numeros inteiros, flutuantes,\n negativos e porcentagens')       
+        sg.popup('Calculadora simplificada v3.2\n Desenvolvida para culculos entre\n dois numeros inteiros, flutuantes,\n negativos e porcentagens',title="sobre")       
 window.close()    
